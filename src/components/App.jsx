@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react';
-import initialContacts from './Data/Contacts.json';
 import { Layout } from './Layout';
 import { GlobalStyle } from './GlobalStyles';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { capitalizedName } from './Utils/capitalizedName';
+import { getContacts } from './Utils/getContacts';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem('contacts');
-    if (savedContacts !== null) {
-      return JSON.parse(savedContacts);
-    } else {
-      return initialContacts;
-    }
-  });
-
+  const [contacts, setContacts] = useState(getContacts);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
